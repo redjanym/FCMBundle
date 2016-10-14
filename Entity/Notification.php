@@ -1,8 +1,6 @@
 <?php
 
-
 namespace RedjanYm\FCMBundle\Entity;
-
 
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -21,12 +19,9 @@ class Notification
     public function __construct()
     {
         $this->priority = 'high';
-        $this->data     = array();
+        $this->data = array();
     }
 
-    /**
-     * @return null
-     */
     public function getTitle()
     {
         return $this->title;
@@ -44,9 +39,6 @@ class Notification
         return $this;
     }
 
-    /**
-     * @return null
-     */
     public function getBody()
     {
         return $this->body;
@@ -109,10 +101,10 @@ class Notification
      */
     public function getIcon()
     {
-        if( $this->icon ){
+        if ($this->icon) {
             return $this->icon;
         } else {
-            throw new NotFoundHttpException("The Mobile Notification must have a Icon!");
+            throw new NotFoundHttpException('The Mobile Notification must have an Icon!');
         }
     }
 

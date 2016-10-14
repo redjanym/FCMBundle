@@ -94,3 +94,8 @@ $fcmClient->sendNotification($notification);
 The request of sending the notification is a HTTP Synchronous Request. 
 
 **The Asynchronous requests will be implemented in the next version!**
+
+* This Bundle is a wrapper for the [Firebase Cloud Messaging](https://github.com/sngrl/php-firebase-cloud-messaging) php library
+-----------
+**License**
+FCMBundle is licensed under the MIT license
