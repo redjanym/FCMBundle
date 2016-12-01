@@ -71,9 +71,7 @@ $notification = $fcmClient->createDeviceNotification(
 In case you need to send extra data or set other notification properties the Notification Entity supports a set of setters and getters like:
 ```
     $notification->setData($array); and $notification->getData();
-    
     $notification->setPriority('high'); // Excepts 2 priorities, high(default) and low
-    
     $notification->setIcon('name of icon located in the native mobile app');
 ```
 
@@ -88,7 +86,7 @@ You could also modify the arguments passed in the `createDeviceNotification` met
 
 * Send notification
 ```
-$fcmClient->sendNotification($notification);
+    $fcmClient->sendNotification($notification);
 ```
 
 The request of sending the notification is a HTTP Synchronous Request. 
@@ -103,4 +101,5 @@ The request of sending the notification is a HTTP Synchronous Request.
 
 -----------
 **License**
-FCMBundle is licensed under the MIT license
+
+FCMBundle is licensed under the [MIT license](LICENSE)
