@@ -17,7 +17,7 @@ use sngrl\PhpFirebaseCloudMessaging\Client;
 use sngrl\PhpFirebaseCloudMessaging\Message;
 use sngrl\PhpFirebaseCloudMessaging\Notification;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Device;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
 
 /**
  * The FCMBundle primary class.
@@ -41,6 +41,14 @@ class FCMClient
         $this->client = $client;
     }
 
+    /**
+     * Create a notification of type Device Notification
+     *
+     * @param null $title
+     * @param null $body
+     * @param null $token
+     * @return DeviceNotification
+     */
     public function createDeviceNotification($title = null, $body = null, $token = null)
     {
         $notification = new DeviceNotification();
@@ -53,21 +61,46 @@ class FCMClient
     }
 
     /**
+     * Create a notification of type Topic
+     *
+     * @param null $title
+     * @param null $body
+     * @param null $topic
+     * @return TopicNotification
+     */
+    public function createTopicNotification($title = null, $body = null, $topic = null)
+    {
+        $notification = new TopicNotification();
+        $notification
+            ->setTitle($title)
+            ->setBody($body)
+            ->setTopic($topic);
+
+        return $notification;
+    }
+
+    /**
      * @param DeviceNotification | TopicNotification $notification
      *
      * @return Client
      */
     public function sendNotification($notification)
     {
-        if (!$notification instanceof DeviceNotification) {
-            throw new NotFoundHttpException('Notification must be of type DeviceNotification');
+        if (!$notification instanceof DeviceNotification || !$notification instanceof TopicNotification) {
+            throw new \InvalidArgumentException('Notification must be of type DeviceNotification or TopicNotification');
         }
+
         $this->client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
 
         $message = new Message();
         $message->setPriority($notification->getPriority());
 
-        $message->addRecipient(new Device($notification->getDeviceToken()));
+        // Check for the type of Notification
+        if($notification instanceof DeviceNotification){
+            $message->addRecipient(new Device($notification->getDeviceToken()));
+        } else if ($notification instanceof TopicNotification) {
+            $message->addRecipient(new Topic($notification->getTopic()));
+        }
 
         $message
             ->setNotification(
