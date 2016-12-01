@@ -80,9 +80,41 @@ class FCMClient
     }
 
     /**
+     * Subscribe devices to a Topic
+     *
+     * @param null $topicId
+     * @param array $deviceTokens
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function subscribeDevicesToTopic($topicId = null, $deviceTokens = array())
+    {
+        if(!$topicId || empty($deviceTokens)){
+            throw new \InvalidArgumentException("Please check arguments!");
+        }
+        
+        return $this->client->addTopicSubscription($topicId, $deviceTokens);
+    }
+
+    /**
+     * Remove devices from a Topic
+     *
+     * @param null $topicId
+     * @param array $deviceTokens
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function removeDevicesFromTopic($topicId = null, $deviceTokens = array())
+    {
+        if(!$topicId || empty($deviceTokens)){
+            throw new \InvalidArgumentException("Please check arguments!");
+        }
+
+        return $this->client->removeTopicSubscription($topicId, $deviceTokens);
+    }
+
+    /**
      * @param DeviceNotification | TopicNotification $notification
      *
-     * @return Client
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function sendNotification($notification)
     {
