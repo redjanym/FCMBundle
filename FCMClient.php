@@ -38,6 +38,7 @@ class FCMClient
      */
     public function __construct(Client $client)
     {
+        $client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
         $this->client = $client;
     }
 
@@ -121,8 +122,6 @@ class FCMClient
         if (!$notification instanceof DeviceNotification && !$notification instanceof TopicNotification) {
             throw new \InvalidArgumentException('Notification must be of type DeviceNotification or TopicNotification');
         }
-
-        $this->client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
 
         $message = new Message();
         $message->setPriority($notification->getPriority());
