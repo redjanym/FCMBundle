@@ -17,7 +17,7 @@ use sngrl\PhpFirebaseCloudMessaging\Client;
 use sngrl\PhpFirebaseCloudMessaging\Message;
 use sngrl\PhpFirebaseCloudMessaging\Notification;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Device;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
 
 /**
  * The FCMBundle primary class.
@@ -38,9 +38,18 @@ class FCMClient
      */
     public function __construct(Client $client)
     {
+        $client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
         $this->client = $client;
     }
 
+    /**
+     * Create a notification of type Device Notification
+     *
+     * @param null $title
+     * @param null $body
+     * @param null $token
+     * @return DeviceNotification
+     */
     public function createDeviceNotification($title = null, $body = null, $token = null)
     {
         $notification = new DeviceNotification();
@@ -53,21 +62,76 @@ class FCMClient
     }
 
     /**
+     * Create a notification of type Topic
+     *
+     * @param null $title
+     * @param null $body
+     * @param null $topic
+     * @return TopicNotification
+     */
+    public function createTopicNotification($title = null, $body = null, $topic = null)
+    {
+        $notification = new TopicNotification();
+        $notification
+            ->setTitle($title)
+            ->setBody($body)
+            ->setTopic($topic);
+
+        return $notification;
+    }
+
+    /**
+     * Subscribe devices to a Topic
+     *
+     * @param null $topicId
+     * @param array $deviceTokens
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function subscribeDevicesToTopic($topicId = null, $deviceTokens = array())
+    {
+        if(!$topicId || empty($deviceTokens)){
+            throw new \InvalidArgumentException("Please check arguments!");
+        }
+        
+        return $this->client->addTopicSubscription($topicId, $deviceTokens);
+    }
+
+    /**
+     * Remove devices from a Topic
+     *
+     * @param null $topicId
+     * @param array $deviceTokens
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function removeDevicesFromTopic($topicId = null, $deviceTokens = array())
+    {
+        if(!$topicId || empty($deviceTokens)){
+            throw new \InvalidArgumentException("Please check arguments!");
+        }
+
+        return $this->client->removeTopicSubscription($topicId, $deviceTokens);
+    }
+
+    /**
      * @param DeviceNotification | TopicNotification $notification
      *
-     * @return Client
+     * @return \Psr\Http\Message\ResponseInterface
      */
     public function sendNotification($notification)
     {
-        if (!$notification instanceof DeviceNotification) {
-            throw new NotFoundHttpException('Notification must be of type DeviceNotification');
+        if (!$notification instanceof DeviceNotification && !$notification instanceof TopicNotification) {
+            throw new \InvalidArgumentException('Notification must be of type DeviceNotification or TopicNotification');
         }
-        $this->client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
 
         $message = new Message();
         $message->setPriority($notification->getPriority());
 
-        $message->addRecipient(new Device($notification->getDeviceToken()));
+        // Check for the type of Notification
+        if($notification instanceof DeviceNotification){
+            $message->addRecipient(new Device($notification->getDeviceToken()));
+        } else if ($notification instanceof TopicNotification) {
+            $message->addRecipient(new Topic($notification->getTopic()));
+        }
 
         $message
             ->setNotification(

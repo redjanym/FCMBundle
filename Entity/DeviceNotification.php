@@ -2,8 +2,6 @@
 
 namespace RedjanYm\FCMBundle\Entity;
 
-use Symfony\Component\Console\Exception\InvalidArgumentException;
-
 class DeviceNotification extends Notification implements \RedjanYm\FCMBundle\Model\DeviceNotification
 {
     private $deviceToken;
@@ -30,7 +28,7 @@ class DeviceNotification extends Notification implements \RedjanYm\FCMBundle\Mod
         if ($this->deviceToken) {
             return $this->deviceToken;
         } else {
-            throw new InvalidArgumentException('The Mobile Notification must have a Device Token!');
+            throw new \InvalidArgumentException('The Mobile Notification must have a Device Token!');
         }
     }
 }
