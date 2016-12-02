@@ -118,7 +118,7 @@ class FCMClient
      */
     public function sendNotification($notification)
     {
-        if (!$notification instanceof DeviceNotification || !$notification instanceof TopicNotification) {
+        if (!$notification instanceof DeviceNotification && !$notification instanceof TopicNotification) {
             throw new \InvalidArgumentException('Notification must be of type DeviceNotification or TopicNotification');
         }
 
