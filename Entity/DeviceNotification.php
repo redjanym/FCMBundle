@@ -2,8 +2,16 @@
 
 namespace RedjanYm\FCMBundle\Entity;
 
+use sngrl\PhpFirebaseCloudMessaging\Notification;
+
 class DeviceNotification extends Notification implements \RedjanYm\FCMBundle\Model\DeviceNotification
 {
+
+    use NotificationData;
+
+    /**
+     * @var string $deviceToken
+     */
     private $deviceToken;
 
     /**

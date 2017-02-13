@@ -92,7 +92,7 @@ class FCMClient
         if(!$topicId || empty($deviceTokens)){
             throw new \InvalidArgumentException("Please check arguments!");
         }
-        
+
         return $this->client->addTopicSubscription($topicId, $deviceTokens);
     }
 
@@ -123,8 +123,10 @@ class FCMClient
             throw new \InvalidArgumentException('Notification must be of type DeviceNotification or TopicNotification');
         }
 
-        $message = new Message();
-        $message->setPriority($notification->getPriority());
+        $message = (new Message())
+            ->setNotification($notification)
+            ->setData($notification->getData())
+            ->setPriority($notification->getPriority());
 
         // Check for the type of Notification
         if($notification instanceof DeviceNotification){
@@ -132,15 +134,6 @@ class FCMClient
         } else if ($notification instanceof TopicNotification) {
             $message->addRecipient(new Topic($notification->getTopic()));
         }
-
-        $message
-            ->setNotification(
-                new Notification(
-                    $notification->getTitle(),
-                    $notification->getBody()
-                )
-            )
-            ->setData($notification->getData());
 
         return $this->client->send($message);
     }
