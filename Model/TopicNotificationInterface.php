@@ -2,7 +2,7 @@
 
 namespace RedjanYm\FCMBundle\Model;
 
-interface TopicNotification
+interface TopicNotificationInterface
 {
     /**
      * @param string $topic

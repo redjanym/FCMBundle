@@ -4,7 +4,7 @@ namespace RedjanYm\FCMBundle\Entity;
 
 use sngrl\PhpFirebaseCloudMessaging\Notification;
 
-class TopicNotification extends Notification implements \RedjanYm\FCMBundle\Model\TopicNotification
+class TopicNotification extends Notification implements \RedjanYm\FCMBundle\Model\TopicNotificationInterface
 {
 
     use NotificationData;

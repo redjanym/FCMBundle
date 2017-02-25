@@ -4,7 +4,7 @@ namespace RedjanYm\FCMBundle\Entity;
 
 use sngrl\PhpFirebaseCloudMessaging\Notification;
 
-class DeviceNotification extends Notification implements \RedjanYm\FCMBundle\Model\DeviceNotification
+class DeviceNotification extends Notification implements \RedjanYm\FCMBundle\Model\DeviceNotificationInterface
 {
 
     use NotificationData;

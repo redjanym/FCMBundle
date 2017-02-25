@@ -15,7 +15,6 @@ use RedjanYm\FCMBundle\Entity\DeviceNotification;
 use RedjanYm\FCMBundle\Entity\TopicNotification;
 use sngrl\PhpFirebaseCloudMessaging\Client;
 use sngrl\PhpFirebaseCloudMessaging\Message;
-use sngrl\PhpFirebaseCloudMessaging\Notification;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Device;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
 

@@ -2,7 +2,7 @@
 
 namespace RedjanYm\FCMBundle\Model;
 
-interface DeviceNotification
+interface DeviceNotificationInterface
 {
     /**
      * @param string $token
