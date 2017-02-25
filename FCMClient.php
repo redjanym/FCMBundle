@@ -37,7 +37,6 @@ class FCMClient
      */
     public function __construct(Client $client)
     {
-        $client->injectGuzzleHttpClient(new \GuzzleHttp\Client());
         $this->client = $client;
     }
 

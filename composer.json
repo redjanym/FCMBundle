@@ -14,7 +14,7 @@
   ],
     "require": {
     "php": ">=5.3",
-    "sngrl/php-firebase-cloud-messaging": "dev-master"
+    "redjanym/php-firebase-cloud-messaging": "1.*"
   },
   "autoload": {
     "psr-4": {
