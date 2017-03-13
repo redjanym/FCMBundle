@@ -58,7 +58,7 @@ class DeviceNotification extends Notification implements DeviceNotificationInter
      */
     public function getDeviceToken()
     {
-        if ($this->deviceTokens->isEmpty() == false) {
+        if ($this->deviceTokens->isEmpty() === false) {
             return $this->deviceTokens->first();
         } else {
             throw new \InvalidArgumentException('The Mobile Notification must have a Device Token!');
@@ -70,7 +70,7 @@ class DeviceNotification extends Notification implements DeviceNotificationInter
      */
     public function getDeviceTokens()
     {
-        if ($this->deviceTokens->isEmpty() == false) {
+        if ($this->deviceTokens->isEmpty() === false) {
             return $this->deviceTokens->toArray();
         } else {
             throw new \InvalidArgumentException('The Mobile Notification must have a Device Token!');
