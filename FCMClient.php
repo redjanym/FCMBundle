@@ -45,7 +45,7 @@ class FCMClient
      *
      * @param null $title
      * @param null $body
-     * @param null $token
+     * @param null | array $token
      * @return DeviceNotification
      */
     public function createDeviceNotification($title = null, $body = null, $token = null)
@@ -53,8 +53,13 @@ class FCMClient
         $notification = new DeviceNotification();
         $notification
             ->setTitle($title)
-            ->setBody($body)
-            ->setDeviceToken($token);
+            ->setBody($body);
+
+        if(is_array($token)){
+            $notification->setDeviceTokens($token);
+        } else {
+            $notification->addDeviceToken($token);
+        }
 
         return $notification;
     }
@@ -128,7 +133,9 @@ class FCMClient
 
         // Check for the type of Notification
         if($notification instanceof DeviceNotification){
-            $message->addRecipient(new Device($notification->getDeviceToken()));
+            foreach ($notification->getDeviceTokens() as $deviceToken) {
+                $message->addRecipient(new Device($deviceToken));
+            }
         } else if ($notification instanceof TopicNotification) {
             $message->addRecipient(new Topic($notification->getTopic()));
         }
