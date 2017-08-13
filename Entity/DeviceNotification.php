@@ -38,6 +38,10 @@ class DeviceNotification extends Notification implements DeviceNotificationInter
      */
     public function addDeviceToken($token)
     {
+        if(is_string($token) === false){
+            throw new \InvalidArgumentException('Token must be a string!');
+        }
+
         $this->deviceTokens->add($token);
 
         return $this;
@@ -48,6 +52,10 @@ class DeviceNotification extends Notification implements DeviceNotificationInter
      */
     public function setDeviceTokens($tokens)
     {
+        if(is_array($tokens) === false){
+            throw new \InvalidArgumentException('Tokens must be an array of strings!');
+        }
+
         $this->deviceTokens = new ArrayCollection($tokens);
 
         return $this;

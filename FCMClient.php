@@ -48,7 +48,7 @@ class FCMClient
      * @param null | array $token
      * @return DeviceNotification
      */
-    public function createDeviceNotification($title = null, $body = null, $token = null)
+    public function createDeviceNotification($title = null, $body = null, $token = array())
     {
         $notification = new DeviceNotification();
         $notification
