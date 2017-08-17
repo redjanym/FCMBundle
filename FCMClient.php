@@ -129,7 +129,9 @@ class FCMClient
         $message = (new Message())
             ->setNotification($notification)
             ->setData($notification->getData())
-            ->setPriority($notification->getPriority());
+            ->setPriority($notification->getPriority())
+            ->setJsonData($notification->getJsonData())
+            ->setContentAvailable($notification->getContentAvailable());
 
         // Check for the type of Notification
         if($notification instanceof DeviceNotification){
