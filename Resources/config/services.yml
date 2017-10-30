@@ -1,6 +1,7 @@
 services:
     redjan_ym_fcm.client:
         class: RedjanYm\FCMBundle\FCMClient
+        public: true
         arguments: ['@sngrl.firebase_php_notification']
 
     sngrl.firebase_php_notification:
