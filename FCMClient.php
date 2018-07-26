@@ -13,7 +13,7 @@ namespace RedjanYm\FCMBundle;
 
 use RedjanYm\FCMBundle\Entity\DeviceNotification;
 use RedjanYm\FCMBundle\Entity\TopicNotification;
-use sngrl\PhpFirebaseCloudMessaging\Client;
+use sngrl\PhpFirebaseCloudMessaging\ClientInterface;
 use sngrl\PhpFirebaseCloudMessaging\Message;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Device;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
@@ -26,18 +26,32 @@ use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
 class FCMClient
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     private $client;
 
     /**
      * FCMClient constructor.
      *
-     * @param Client $client
+     * @param ClientInterface $client
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->client = $client;
+    }
+
+    /**
+     * add your server api key here
+     * read how to obtain an api key here: https://firebase.google.com/docs/server/setup#prerequisites
+     *
+     * @param string $apiKey
+     *
+     * @return \RedjanYm\FCMBundle\FCMClient
+     */
+    public function setApiKey($apiKey)
+    {
+        $this->client->setApiKey($apiKey);
+        return $this;
     }
 
     /**
