@@ -13,7 +13,7 @@ namespace RedjanYm\FCMBundle;
 
 use RedjanYm\FCMBundle\Entity\DeviceNotification;
 use RedjanYm\FCMBundle\Entity\TopicNotification;
-use sngrl\PhpFirebaseCloudMessaging\Client;
+use sngrl\PhpFirebaseCloudMessaging\ClientInterface;
 use sngrl\PhpFirebaseCloudMessaging\Message;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Device;
 use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
@@ -26,16 +26,16 @@ use sngrl\PhpFirebaseCloudMessaging\Recipient\Topic;
 class FCMClient
 {
     /**
-     * @var Client
+     * @var ClientInterface
      */
     private $client;
 
     /**
      * FCMClient constructor.
      *
-     * @param Client $client
+     * @param ClientInterface $client
      */
-    public function __construct(Client $client)
+    public function __construct(ClientInterface $client)
     {
         $this->client = $client;
     }
