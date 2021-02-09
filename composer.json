@@ -1,7 +1,7 @@
 {
   "name": "redjanym/fcm-bundle",
   "type": "symfony-bundle",
-  "description": "A Bundle for Symfony2 projects to send notifications in mobile devices through Firebase Cloud Messaging API",
+  "description": "A Bundle for Symfony projects to send notifications in mobile devices through Firebase Cloud Messaging API",
   "license": "MIT",
   "keywords": ["PHP","FCM","Google","Firebase","Cloud","Notifications","Symfony", "Bundle","Android","iOS","Chrome"],
   "homepage": "https://github.com/redjanym/FCMBundle",
