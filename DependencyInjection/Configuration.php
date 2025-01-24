@@ -22,7 +22,7 @@ class Configuration implements ConfigurationInterface
 
         $rootNode
             ->children()
-                ->scalarNode('firebase_api_key')->isRequired()->cannotBeEmpty()->end()
+                ->scalarNode('service_account_file')->isRequired()->cannotBeEmpty()->end()
             ->end();
 
         return $treeBuilder;

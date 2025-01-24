@@ -22,7 +22,7 @@ class RedjanYmFCMExtension extends Extension
         $configuration = new Configuration();
         $config = $this->processConfiguration($configuration, $configs);
 
-        $container->setParameter('redjan_ym_fcm.firebase_api_key', $config['firebase_api_key']);
+        $container->setParameter('redjan_ym_fcm.service_account_file', $config['service_account_file']);
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
