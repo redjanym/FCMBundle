@@ -1,9 +1,5 @@
 services:
     redjan_ym_fcm.client:
-        class: RedjanYm\FCMBundle\FCMClient
-        public: true
-        arguments: ['@redjan_ym.firebase_php_notification']
-
-    redjan_ym.firebase_php_notification:
         class: RedjanYm\FCM\Client
+        public: true
         arguments: ['%redjan_ym_fcm.service_account_file%']

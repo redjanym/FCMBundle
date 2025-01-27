@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=7.4",
-    "redjanym/php-firebase-cloud-messaging": "dev-feature/httpv1-migration"
+    "redjanym/php-firebase-cloud-messaging": "2.*"
   },
   "autoload": {
     "psr-4": {
