@@ -14,7 +14,7 @@
   ],
   "require": {
     "php": ">=7.4",
-    "redjanym/php-firebase-cloud-messaging": "2.*"
+    "redjanym/php-firebase-cloud-messaging": "^2.0"
   },
   "autoload": {
     "psr-4": {
