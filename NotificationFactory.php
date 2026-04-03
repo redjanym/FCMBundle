@@ -10,6 +10,8 @@ class NotificationFactory
 {
     /**
      * Create a notification targeted at a specific device token.
+     *
+     * @param array<string, mixed> $data
      */
     public function createDeviceNotification(string $token, string $title, ?string $body = null, array $data = []): Notification
     {
@@ -18,6 +20,8 @@ class NotificationFactory
 
     /**
      * Create a notification targeted at a topic.
+     *
+     * @param array<string, mixed> $data
      */
     public function createTopicNotification(string $topic, string $title, ?string $body = null, array $data = []): Notification
     {
