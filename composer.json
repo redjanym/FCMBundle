@@ -14,11 +14,23 @@
   ],
   "require": {
     "php": ">=7.4",
-    "redjanym/php-firebase-cloud-messaging": "^2.0"
+    "redjanym/php-firebase-cloud-messaging": "^2.1"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^9.5 || ^10.0",
+    "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
+    "symfony/config": "^5.4 || ^6.0 || ^7.0",
+    "symfony/http-kernel": "^5.4 || ^6.0 || ^7.0",
+    "symfony/yaml": "^5.4 || ^6.0 || ^7.0"
   },
   "autoload": {
     "psr-4": {
       "RedjanYm\\FCMBundle\\": ""
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "RedjanYm\\FCMBundle\\Tests\\": "Tests/"
     }
   }
 }

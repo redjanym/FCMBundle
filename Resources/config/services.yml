@@ -3,3 +3,11 @@ services:
         class: RedjanYm\FCM\Client
         public: true
         arguments: ['%redjan_ym_fcm.service_account_file%']
+
+    redjan_ym_fcm.notification_factory:
+        class: RedjanYm\FCMBundle\NotificationFactory
+        public: true
+
+    # Autowiring aliases
+    RedjanYm\FCM\Client: '@redjan_ym_fcm.client'
+    RedjanYm\FCMBundle\NotificationFactory: '@redjan_ym_fcm.notification_factory'
